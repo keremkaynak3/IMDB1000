@@ -1,40 +1,51 @@
-from sampleGui import UI
-from database import Database
-from movieFunctions import Functions
+import sampleUI
+import database
+import movieFunctions
 
 if __name__ == "__main__":
     path = r"C:\Users\MR. CAPH\PycharmProjects\IMDB1000\imdb_top_1000.csv"
 
-    # Database sınıfı kullanılarak CSV dosyası okunur
-    db = Database(path)
+    # Veritabanı sınıfı kullanılarak CSV dosyası okunur
+    db = database.Database(path)  # Sınıf adları büyük harfle başlatılır
 
     # Fonksiyon sınıfı ile veritabanı işlevleri yönetilir
-    funcs = Functions()
+    funcs = movieFunctions.MovieFunctions(db)  # MovieFunctions sınıfı oluşturuldu ve database'i aldı
 
     # Menü seçenekleri
-    menu_choices = ["Film Ara", "Yönetmen Ara", "IMDB Puan", "Türler", "Başrol Ara", "Çıkış"]
+    menu_choices = ["Film Ara", "Yönetmen Ara", "IMDB Puanı", "Türler", "Başrol Ara", "Çıkış"]
 
     # UI sınıfı kullanılarak menü arayüzü oluşturulur
-    ui = UI(menu_choices)
+    ui = sampleUI.UI(menu_choices)
 
     while True:
-        ui.menu()
+        ui.menu()  # Menü görüntülenir
         try:
             secim = int(input("Lütfen seçiminizi giriniz: "))
             if secim == 1:
-                funcs.query(["Series_Title", input("Lütfen film içerisinde geçen bir kelime giriniz: ").lower()],
+                # Film Ara
+                search_term = input("Lütfen film içerisinde geçen bir kelime giriniz: ").lower()
+                funcs.query(["Series_Title", search_term],
                             {"Filmin Adı": 'Series_Title', "IMDB Puanı": 'IMDB_Rating'})
             elif secim == 2:
-                funcs.query(['Director', input("Lütfen yönetmen içerisinde geçen bir kelime giriniz: ").lower()],
+                # Yönetmen Ara
+                search_term = input("Lütfen yönetmen içerisinde geçen bir kelime giriniz: ").lower()
+                funcs.query(['Director', search_term],
                             {"Filmin Adı": 'Series_Title', "Yönetmen": "Director", "IMDB Puanı": 'IMDB_Rating'})
             elif secim == 3:
-                funcs.list_imdb_rating([input("Büyük sayıyı giriniz: "), input("Küçük sayıyı giriniz: ")])
+                # IMDB Puanı Ara
+                upper_limit = input("Büyük sayıyı giriniz: ")
+                lower_limit = input("Küçük sayıyı giriniz: ")
+                funcs.list_imdb_rating([upper_limit, lower_limit])
             elif secim == 4:
-                funcs.query(['Genre', input("Lütfen tür içerisinde geçen bir kelime giriniz: ").lower()],
+                # Türler Ara
+                genre = input("Lütfen tür içerisinde geçen bir kelime giriniz: ").lower()
+                funcs.query(['Genre', genre],
                             {"Filmin Adı": 'Series_Title', "Yönetmen": "Director", "Tür": "Genre",
                              "IMDB Puanı": 'IMDB_Rating'})
             elif secim == 5:
-                funcs.find_star(input("Lütfen başrol isminin içerisinde geçen bir kelime giriniz: ").lower())
+                # Başrol Ara
+                star_name = input("Lütfen başrol isminin içerisinde geçen bir kelime giriniz: ").lower()
+                funcs.find_star(star_name)
             elif secim == 6:
                 print("Programdan çıkılıyor.")
                 break
@@ -42,4 +53,3 @@ if __name__ == "__main__":
                 print("Yanlış seçim. Lütfen tekrar deneyin.")
         except ValueError:
             print("Lütfen geçerli bir sayı girin.")
-

@@ -1,17 +1,19 @@
 import csv
+
 class Database:
     def __init__(self, path):
-        self.path = path
-        self.dataDict = self.read_csv()
+        self.data = self.read_csv(path)
 
-    def read_csv(self):
-        from csv import DictReader
-        dataDict = {}
-        with open(self.path, mode='r', encoding='utf-8-sig') as file:
-            csvReader = DictReader(file)
-            lineCount = 0
-            for row in csvReader:
-                key = f"film_{lineCount}"  # Her satır için bir anahtar oluştur
-                dataDict[key] = row
-                lineCount += 1
-        return dataDict
+    def read_csv(self, path):
+        """
+        CSV dosyasını okur ve veritabanı olarak kullanılacak bir sözlük oluşturur.
+        :param path: CSV dosyasının yolu
+        :return: Filmler veritabanı
+        """
+        with open(path, mode='r', encoding='utf-8') as file:
+            reader = csv.DictReader(file)
+            database = {i: row for i, row in enumerate(reader)}
+        return database
+
+    def items(self):
+        return self.data.items()

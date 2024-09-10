@@ -47,13 +47,18 @@ class GUI(tk.Tk):
         self.results_frame = tk.Frame(self)
         self.results_frame.grid(row=5, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
 
-        self.results_text = tk.Text(self.results_frame, height=15, width=80, wrap="word", bg="#ffffff", relief="solid", borderwidth=1)
+        # Text kutusu
+        self.results_text = tk.Text(self.results_frame, wrap="word", bg="#ffffff", relief="solid", borderwidth=1)
         self.results_text.grid(row=0, column=0, sticky="nsew")
 
         # Kaydırma çubuğu
         self.scrollbar = ttk.Scrollbar(self.results_frame, orient="vertical", command=self.results_text.yview)
         self.results_text.configure(yscrollcommand=self.scrollbar.set)
         self.scrollbar.grid(row=0, column=1, sticky="ns")
+
+        # Grid ayarları
+        self.results_frame.grid_rowconfigure(0, weight=1)
+        self.results_frame.grid_columnconfigure(0, weight=1)
 
         # Arama çerçevesinin genişleyebilmesi için
         self.grid_rowconfigure(5, weight=1)
@@ -87,10 +92,10 @@ class GUI(tk.Tk):
 
         if choice == "Film Ara":
             self.funcs.query(["Series_Title", keyword],
-                             {"Filmin Adı": 'Series_Title', "IMDB Puanı": 'IMDB_Rating'})
+                             {"Filmin Adı": 'Series_Title'})
         elif choice == "Yönetmen Ara":
             self.funcs.query(['Director', keyword],
-                             {"Filmin Adı": 'Series_Title', "Yönetmen": 'Director', "IMDB Puanı": 'IMDB_Rating'})
+                             {"Filmin Adı": 'Series_Title', "Yönetmen": 'Director'})
         elif choice == "IMDB Puanı":
             try:
                 limits = keyword.split(',')
@@ -99,15 +104,13 @@ class GUI(tk.Tk):
                 upper_limit, lower_limit = float(limits[0]), float(limits[1])
                 self.funcs.list_imdb_rating([upper_limit, lower_limit])
             except ValueError as e:
-                self.results_text.insert(tk.END, f"Geçersiz puan aralığı: {e}\n")
-        elif choice == "Türler":
-            self.funcs.query(['Genre', keyword],
-                             {"Filmin Adı": 'Series_Title', "Tür": 'Genre', "IMDB Puanı": 'IMDB_Rating'})
+                self.results_text.insert(tk.END, f"Geçersiz puan aralığı. Hata: {str(e)}")
+                return
         elif choice == "Başrol Ara":
             self.funcs.find_star(keyword)
         else:
-            messagebox.showerror("Hata", "Geçersiz seçim!")
+            self.results_text.insert(tk.END, "Bilinmeyen bir seçenek seçildi.")
 
-        # Sonuçları GUI'de göster
+        # Sonuçları göster
         for result in self.funcs.results:
-            self.results_text.insert(tk.END, result + "\n")
+            self.results_text.insert(tk.END, result + "\n\n")

@@ -3,10 +3,13 @@ class MovieFunctions:
         self.db = db
         self.results = []
 
+
     def query(self, search_keyword, printing_keywords):
         self.results.clear()
         for key, film in self.db.items():
-            if film[search_keyword[0]].lower().find(search_keyword[1].lower()) != -1:
+            # film[search_keyword[0]] verisini alıp, search_keyword[1] içinde arama yapıyoruz
+            # lower().find() yerine 'in' ile kontrolü daha basit yapalım
+            if search_keyword[1].lower() in film[search_keyword[0]].lower():
                 result = "-" * 10 + "\n"
                 for pkey, printing_keyword in printing_keywords.items():
                     result += f"{pkey} ----> {film[printing_keyword]}\n"

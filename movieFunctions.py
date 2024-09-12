@@ -22,13 +22,13 @@ class MovieFunctions:
             upper_limit, lower_limit = keyword[0], keyword[1]
             for key, film in self.db.items():
                 if upper_limit >= float(film['IMDB_Rating']) >= lower_limit:
-                    self.results.append(f"Film'in adı '{film['Series_Title']}' IMDB puanı ----> {film['IMDB_Rating']}")
+                    self.results.append(f"MOVIE NAME: '{film['Series_Title']}' IMDB Rating --> {film['IMDB_Rating']}")
         except ValueError:
-            self.results.append("Geçersiz puan aralığı.")
+            self.results.append("INVALID RATING RANGE!.")
 
     def find_star(self, keyword):
         self.results.clear()
         for key, film in self.db.items():
             stars = [film['Star1'], film['Star2'], film['Star3'], film['Star4']]
             if any(star.lower().find(keyword.lower()) != -1 for star in stars):
-                self.results.append(f"*  {', '.join(stars)} film'i '{film['Series_Title']}' IMDB puanı ----> {film['IMDB_Rating']}")
+                self.results.append(f"*  {', '.join(stars)} MOVIE: '{film['Series_Title']}' IMDB Rating --> {film['IMDB_Rating']}")

@@ -5,8 +5,8 @@ from tkinter import ttk, messagebox
 class GUI(tk.Tk):
     def __init__(self, db, funcs):
         super().__init__()
-        self.title("IMDB TOP 1000")
-        self.geometry("700x500")
+        self.title("Movie Finder")
+        self.geometry("1000x700")
         self.db = db
         self.funcs = funcs
         self.configure(bg="#e0e0e0")
@@ -19,7 +19,7 @@ class GUI(tk.Tk):
         self.label.grid(row=0, column=0, columnspan=2, pady=10, padx=10)
 
         # Menü seçenekleri
-        self.menu_var = tk.StringVar(value="Choose A Method")
+        self.menu_var = tk.StringVar(value="...")
         self.menu_options = ["By Movie Name", "By Director", "By IMDB Rating", "By Type", "By Actor"]
         self.dropdown = ttk.Combobox(self, textvariable=self.menu_var, values=self.menu_options, state="readonly")
         self.dropdown.grid(row=1, column=0, pady=10, padx=10, sticky="ew")

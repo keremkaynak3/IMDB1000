@@ -1,5 +1,6 @@
 ('C:\\Users\\MR. CAPH\\PycharmProjects\\IMDB1000\\build\\main\\PYZ-00.pyz',
- [('_compat_pickle',
+ [('GUI', 'C:\\Users\\MR. CAPH\\PycharmProjects\\IMDB1000\\GUI.py', 'PYMODULE'),
+  ('_compat_pickle',
    'C:\\Users\\MR. '
    'CAPH\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\_compat_pickle.py',
    'PYMODULE'),
@@ -329,9 +330,6 @@
    'C:\\Users\\MR. '
    'CAPH\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\random.py',
    'PYMODULE'),
-  ('sampleUI',
-   'C:\\Users\\MR. CAPH\\PycharmProjects\\IMDB1000\\sampleUI.py',
-   'PYMODULE'),
   ('selectors',
    'C:\\Users\\MR. '
    'CAPH\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\selectors.py',
@@ -379,6 +377,26 @@
   ('threading',
    'C:\\Users\\MR. '
    'CAPH\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\threading.py',
+   'PYMODULE'),
+  ('tkinter',
+   'C:\\Users\\MR. '
+   'CAPH\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\tkinter\\__init__.py',
+   'PYMODULE'),
+  ('tkinter.commondialog',
+   'C:\\Users\\MR. '
+   'CAPH\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\tkinter\\commondialog.py',
+   'PYMODULE'),
+  ('tkinter.constants',
+   'C:\\Users\\MR. '
+   'CAPH\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\tkinter\\constants.py',
+   'PYMODULE'),
+  ('tkinter.messagebox',
+   'C:\\Users\\MR. '
+   'CAPH\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\tkinter\\messagebox.py',
+   'PYMODULE'),
+  ('tkinter.ttk',
+   'C:\\Users\\MR. '
+   'CAPH\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\tkinter\\ttk.py',
    'PYMODULE'),
   ('token',
    'C:\\Users\\MR. '

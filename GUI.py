@@ -6,7 +6,7 @@ class GUI(tk.Tk):
     def __init__(self, db, funcs):
         super().__init__()
         self.title("Movie Finder")
-        self.geometry("1000x700")
+        self.geometry("500x400")
         self.db = db
         self.funcs = funcs
         self.configure(bg="#e0e0e0")
